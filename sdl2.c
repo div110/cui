@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <math.h>
 uint16_t size_x = 1280;
 uint16_t size_y = 680;
@@ -27,15 +28,18 @@ SDL_SetRenderDrawColor(renderer,0,0,0,255);
 SDL_RenderClear(renderer);
 
 SDL_SetRenderDrawColor(renderer,255,0,255,255);
-
-for(int i=0;i<size_x||function(i)<size_y;i++){
+int i=0;
+do{
 SDL_PollEvent(&event);
 
 SDL_RenderDrawPoint(renderer,i,size_y*0.5-function(i));
 
 SDL_RenderPresent(renderer);
 SDL_Delay(10);
+i++;
+if(event.type==SDL_QUIT){exit(1);}
 }
+while(i<size_x);
 
 
 return 0;}
