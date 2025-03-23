@@ -7,7 +7,7 @@ uint16_t size_y = 680;
 
 
 double function(double i){
-i = sin(i/32)*16;
+i = (sin(i/32)*16)*(i/64);
 return i;}
 
 
@@ -30,13 +30,22 @@ SDL_RenderClear(renderer);
 SDL_SetRenderDrawColor(renderer,255,0,255,255);
 int i=0;
 do{
-SDL_PollEvent(&event);
 
-SDL_RenderDrawPoint(renderer,i,size_y*0.5-function(i));
 
-SDL_RenderPresent(renderer);
-SDL_Delay(10);
-i++;
+	SDL_PollEvent(&event);
+	SDL_RenderDrawPoint(renderer,i,size_y*0.5-function(i));	
+	SDL_RenderPresent(renderer);
+	SDL_Delay(10);
+	i++;
+	if(event.key.keysym.sym==SDLK_SPACE)
+		{
+			i=0;
+			SDL_SetRenderDrawColor(renderer,0,0,0,255);
+			SDL_RenderClear(renderer);
+			SDL_SetRenderDrawColor(renderer,255,0,255,255);
+		}
+
+
 if(event.type==SDL_QUIT){exit(1);}
 }
 while(i<size_x);
