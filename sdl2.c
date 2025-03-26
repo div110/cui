@@ -1,13 +1,12 @@
 #include <SDL2/SDL.h>
-#include <stdint.h>
 #include <stdlib.h>
 #include <math.h>
-uint16_t size_x = 1280;
-uint16_t size_y = 680;
-
+uint16_t size_x = 680;
+uint16_t size_y = 420;
+int32_t multiplier=1;
 
 double function(double i){
-i = (sin(i/32)*16)*(i/64);
+i = ((sin(i/32)*16))+multiplier;
 return i;}
 
 
@@ -35,7 +34,6 @@ do{
 	SDL_PollEvent(&event);
 	SDL_RenderDrawPoint(renderer,i,size_y*0.5-function(i));	
 	SDL_RenderPresent(renderer);
-	SDL_Delay(10);
 	i++;
 	if(event.key.keysym.sym==SDLK_SPACE)
 		{
@@ -44,6 +42,16 @@ do{
 			SDL_RenderClear(renderer);
 			SDL_SetRenderDrawColor(renderer,255,0,255,255);
 		}
+	else if(event.key.keysym.sym==SDLK_f){
+		multiplier++;
+		printf("multiplier: %d\n",multiplier);
+	}
+	else if(event.key.keysym.sym==SDLK_j){
+		multiplier--;
+		printf("multiplier: %d\n",multiplier);
+		}
+	SDL_PollEvent(&event);
+	SDL_Delay(10);
 
 
 if(event.type==SDL_QUIT){exit(1);}
