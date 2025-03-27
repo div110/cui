@@ -3,7 +3,7 @@
 #include <math.h>
 uint16_t size_x = 680;
 uint16_t size_y = 420;
-int32_t multiplier=1;
+int32_t multiplier=3;
 
 double function(double i){
 i = ((sin(i/32)*16))+multiplier;
